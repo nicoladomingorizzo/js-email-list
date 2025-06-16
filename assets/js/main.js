@@ -15,34 +15,33 @@ Abbellire con CSS o Bootstrap
 Inserire un bottone che al click faccia il fetch altre 10 mail (sostituendo le altre)
 */
 
-//Recupero il nodo della DOM ulEL
+// Recupero il nodo della DOM ulEL
 const ulEl = document.getElementById('list');
 const loadingEl = document.getElementById('loading');
 const generateButtonEl = document.getElementById('generateEmail')
-//creo una costante per l'API che dovrò usare
+// Creo una costante per l'API che dovrò usare
 const randomEmailApiUrl = 'https://flynn.boolean.careers/exercises/api/random/mail';
-//inizializzo la chiamata AJAX all'interno del ciclo for per creare 10 email diverse
+// Inizializzo la chiamata AJAX all'interno del ciclo for per creare 10 email diverse
 generateEmailFunction();
 loadingEl.classList.toggle('d-block');
 loadingEl.classList.toggle('d-none');
 ulEl.classList.toggle('d-none');
 ulEl.classList.toggle('d-block');
 
-
+// Aggiunto un evento click al bottone
 generateButtonEl.addEventListener('click', () => {
     ulEl.innerHTML = `<li class="fw-bold fs-3">LISTA EMAIL GENERATE</li>`;
     generateEmailFunction();
 });
 
-
+// Creata una funzione per generare le email
 function generateEmailFunction() {
     for (let i = 0; i < 10; i++) {
         fetch(randomEmailApiUrl)
             .then(response => response.json())
             .then(data => {
                 const liEl = document.createElement('li');
-                liEl.classList.add('text-primary');
-                liEl.classList.add('mt-3');
+                liEl.classList.add('mt-3', 'text-center', 'text-primary');
                 ulEl.appendChild(liEl);
                 liEl.innerHTML = data.response;
                 console.log(ulEl.innerText);
