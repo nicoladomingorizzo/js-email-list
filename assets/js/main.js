@@ -22,16 +22,15 @@ const generateButtonEl = document.getElementById('generateEmail')
 //creo una costante per l'API che dovrò usare
 const randomEmailApiUrl = 'https://flynn.boolean.careers/exercises/api/random/mail';
 //inizializzo la chiamata AJAX all'interno del ciclo for per creare 10 email diverse
-for (let i = 0; i <= 10; i++) {
+for (let i = 0; i < 10; i++) {
     fetch(randomEmailApiUrl)
         .then(response => response.json())
         .then(data => {
-            console.log(data)
-            const liEl = document.createElement('li');
+            let liEl = document.createElement('li');
             liEl.classList.add('text-primary');
-            liEl.classList.add('mt-2');
-            ulEl.appendChild(liEl);
+            liEl.classList.add('mt-3');
             liEl.innerHTML = data.response;
+            ulEl.appendChild(liEl);
             console.log(ulEl.innerText);
         });
 };
@@ -41,7 +40,20 @@ ulEl.classList.toggle('d-none');
 ulEl.classList.toggle('d-block');
 
 
-
-
+generateButtonEl.addEventListener('click', () => {
+    ulEl.innerHTML = `<li class="fw-bold fs-3">LISTA EMAIL GENERATE</li>`;
+    for (let i = 0; i < 10; i++) {
+        fetch(randomEmailApiUrl)
+            .then(response => response.json())
+            .then(data => {
+                const liEl = document.createElement('li');
+                liEl.classList.add('text-primary');
+                liEl.classList.add('mt-3');
+                ulEl.appendChild(liEl);
+                liEl.innerHTML = data.response;
+                console.log(ulEl.innerText);
+            });
+    };
+});
 
 
