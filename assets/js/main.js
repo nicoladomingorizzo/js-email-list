@@ -19,23 +19,20 @@ Inserire un bottone che al click faccia il fetch altre 10 mail (sostituendo le a
 const ulEl = document.getElementById('list');
 //creo una costante per l'API che dovrò usare
 const randomEmail = 'https://flynn.boolean.careers/exercises/api/random/mail';
-//inizializzo ila chiamata AJAX
-fetch(randomEmail)
-    .then(response => response.json())
-    .then(data => {
-        console.log(data);
-        const liEl = document.createElement('li');
-        // for (let i = 0; i <= 10; i++) {
-
-        // };
-        liEl.innerHTML = data.response;
-        ulEl.appendChild(liEl);
-        console.log(ulEl.innerText);
-    });
-
-
-
-
+//inizializzo la chiamata AJAX all'interno del ciclo for per creare 10 email diverse
+for (let i = 0; i <= 10; i++) {
+    fetch(randomEmail)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+            const liEl = document.createElement('li');
+            liEl.classList.add('text-primary');
+            liEl.classList.add('mt-2');
+            ulEl.appendChild(liEl);
+            liEl.innerHTML = data.response;
+            console.log(ulEl.innerText);
+        });
+};
 
 
 
